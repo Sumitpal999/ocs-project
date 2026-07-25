@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body { background: #f5f5f5; }
+        .navbar { background: #1a1a2e; }
+        .navbar-brand, .nav-link { color: white !important; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4">
+                <h3 class="mb-4">⭐ Post Feedback</h3>
+                <form method="POST" action="{% url 'store_feedback' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label>Comment</label>
+                        <textarea name="comment" class="form-control" rows="4" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label>Rating</label>
+                        <select name="rating" class="form-control" required>
+                            <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                            <option value="4">⭐⭐⭐⭐ (4)</option>
+                            <option value="3">⭐⭐⭐ (3)</option>
+                            <option value="2">⭐⭐ (2)</option>
+                            <option value="1">⭐ (1)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Submit Feedback</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Male-Fashion | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'customer/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'customer/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'customer/css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'customer/css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'customer/css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'customer/css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'customer/css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'customer/css/style.css' %}" type="text/css">
+
+    <style>
+    #searchToggle:target {
+        display: block !important;
+    }
+</style>
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <!-- <div id="preloder">
+        <div class="loader"></div>
+    </div> -->
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__option">
+            <div class="offcanvas__links">
+                <a href="#">Sign in</a>
+                <a href="#">FAQs</a>
+            </div>
+            <div class="offcanvas__top__hover">
+                <span>Usd <i class="arrow_carrot-down"></i></span>
+                <ul>
+                    <li>USD</li>
+                    <li>EUR</li>
+                    <li>USD</li>
+                </ul>
+            </div>
+        </div>
+        <div class="offcanvas__nav__option">
+            <a href="{% url 'shop' %}"><img src="{% static 'customer/img/icon/search.png' %}" alt=""></a>
+            <a href="#"><img src="{% static 'customer/img/icon/heart.png' %}" alt=""></a>
+            <a href="#"><img src="{% static 'customer/img/icon/cart.png' %}" alt=""> <span>0</span></a>
+            <div class="price">$0.00</div>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__text">
+            <p>Free shipping, 30-day return or refund guarantee.</p>
+        </div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    {% include 'customer/header.html' %}
+    <!-- Header Section End -->
+    <input type="checkbox" id="searchToggle-dummy" style="display:none;">
+    <div id="searchToggle" class="inline-search-box"
+        style="display:none; background:#f7f7f7; padding:15px 0; border-top:1px solid #eee;">
+        <div class="container" style="display:flex; align-items:center; gap:10px;">
+            <form action="{% url 'shop' %}" method="GET" style="display:flex; gap:10px; flex:1;">
+                <input type="text" name="q" placeholder="Search products..."
+                    style="flex:1; padding:10px 15px; border:1px solid #ccc; border-radius:4px; outline:none;">
+                <button type="submit"
+                    style="padding:10px 25px; background:#000; color:#fff; border:none; border-radius:4px; cursor:pointer;">Search</button>
+            </form>
+            <a href="#" style="text-decoration:none; font-size:20px; color:#333;">&times;</a>
+        </div>
+    </div>
+
+    <!-- Hero Section Begin -->
+    {% block content %}
+    {% endblock %}
+    <!-- Latest Blog Section End -->
+
+    <!-- Footer Section Begin -->
+    {% include 'customer/footer.html' %}
+    <!-- Footer Section End -->
+
+    <!-- Search Begin -->
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search End -->
+    <!-- Search End -->
+
+    <!-- Js Plugins -->
+    <script src="{% static 'customer/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'customer/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'customer/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'customer/js/jquery.nicescroll.min.js' %}"></script>
+    <script src="{% static 'customer/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'customer/js/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'customer/js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'customer/js/mixitup.min.js' %}"></script>
+    <script src="{% static 'customer/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'customer/js/main.js' %}"></script>
+</body>
+
+</html>

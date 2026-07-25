@@ -1,0 +1,96 @@
+{% load static %}
+<nav class="page-sidebar" id="sidebar">
+    <div id="sidebar-collapse">
+        <div class="admin-block d-flex">
+            <div>
+                <img src="{% static 'myadmin/assets/img/admin-avatar.png' %}" width="45px" />
+            </div>
+            <div class="admin-info">
+                <div class="font-strong">Sumit</div>
+                <small>Sumit Administrator</small>
+            </div>
+        </div>
+        <ul class="side-menu metismenu">
+
+            <!-- Dashboard -->
+            <li>
+                <a href="{% url 'dashboard' %}">
+                    <i class="sidebar-item-icon fa fa-th-large"></i>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+            </li>
+
+            <!-- Category -->
+            <li>
+                <a href="javascript:;">
+                    <i class="sidebar-item-icon fa fa-list"></i>
+                    <span class="nav-label">Category</span>
+                    <i class="fa fa-angle-left arrow"></i>
+                </a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'add_category' %}">Add New Category</a></li>
+                    <li><a href="{% url 'all_category' %}">All Categories</a></li>
+                </ul>
+            </li>
+
+            <!-- Subcategory -->
+            <li>
+                <a href="javascript:;">
+                    <i class="sidebar-item-icon fa fa-list-ul"></i>
+                    <span class="nav-label">Subcategory</span>
+                    <i class="fa fa-angle-left arrow"></i>
+                </a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'add_subcategory' %}">Add New Subcategory</a></li>
+                    <li><a href="{% url 'all_subcategory' %}">All Subcategories</a></li>
+                </ul>
+            </li>
+
+            <!-- Product -->
+            <li>
+                <a href="javascript:;">
+                    <i class="sidebar-item-icon fa fa-shopping-bag"></i>
+                    <span class="nav-label">Product</span>
+                    <i class="fa fa-angle-left arrow"></i>
+                </a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'add_product' %}">Add New Product</a></li>
+                    <li><a href="{% url 'all_product' %}">All Products</a></li>
+                </ul>
+            </li>
+
+            <!-- Users -->
+            <li>
+                <a href="{% url 'all_users' %}">
+                    <i class="sidebar-item-icon fa fa-users"></i>
+                    <span class="nav-label">Users</span>
+                </a>
+            </li>
+
+            <!-- Orders -->
+            <li>
+                <a href="{% url 'all_orders' %}">
+                    <i class="sidebar-item-icon fa fa-shopping-cart"></i>
+                    <span class="nav-label">Orders</span>
+                </a>
+            </li>
+
+            <!-- Inquiry -->
+            <li>
+                <a href="{% url 'all_inquiry' %}">
+                    <i class="sidebar-item-icon fa fa-question-circle"></i>
+                    <span class="nav-label">Inquiry</span>
+                </a>
+            </li>
+
+            <!-- Feedback -->
+            <li>
+                <a href="{% url 'all_feedback' %}">
+                    <i class="sidebar-item-icon fa fa-comment"></i>
+                    <span class="nav-label">Feedback</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</nav>

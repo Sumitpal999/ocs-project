@@ -1,0 +1,97 @@
+{% extends 'myadmin/index.html' %}
+{% block content %}
+<div class="page-content fade-in-up">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Edit Product</div>
+                </div>
+                <div class="ibox-body">
+                    <form method="POST" action="{% url 'update_product' product.p_id %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label>Product Name</label>
+                            <input type="text" name="pname" class="form-control" value="{{ product.pname }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input type="number" name="price" class="form-control" value="{{ product.price }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select name="cat_id" class="form-control" required>
+                                {% for cat in categories %}
+                                <option value="{{ cat.cat_id }}" {% if cat.cat_id == product.cat.cat_id %}selected{% endif %}>
+                                    {{ cat.cat_name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Subcategory</label>
+                            <select name="sub_id" class="form-control" required>
+                                {% for sub in subcategories %}
+                                <option value="{{ sub.sub_id }}" {% if sub.sub_id == product.subcat.sub_id %}selected{% endif %}>
+                                    {{ sub.sub_name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Small Description</label>
+                            <textarea name="small_description" class="form-control"
+                                rows="2">{{ product.small_description }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Large Description</label>
+                            <textarea name="large_description" class="form-control"
+                                rows="4">{{ product.large_description }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="number" name="quantity" class="form-control" value="{{ product.quantity }}"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tag</label>
+                            <select name="tag" class="form-control">
+                                <option value="best" {% if product.tag == 'best' %}selected{% endif %}>Best Seller</option>
+                                <option value="new" {% if product.tag == 'new' %}selected{% endif %}>New Arrival</option>
+                                <option value="hot" {% if product.tag == 'hot' %}selected{% endif %}>Hot Sale</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Size</label><br>
+                            <label class="me-3"><input type="checkbox" name="size" value="S" {% if 'S' in product.size_list %}checked{% endif %}> S</label>
+                            <label class="me-3"><input type="checkbox" name="size" value="M" {% if 'M' in product.size_list %}checked{% endif %}> M</label>
+                            <label class="me-3"><input type="checkbox" name="size" value="L" {% if 'L' in product.size_list %}checked{% endif %}> L</label>
+                            <label class="me-3"><input type="checkbox" name="size" value="XL" {% if 'XL' in product.size_list %}checked{% endif %}> XL</label>
+                            <label class="me-3"><input type="checkbox" name="size" value="XXL" {% if 'XXL' in product.size_list %}checked{% endif %}> XXL</label>
+                        </div>
+                        <div class="mb-3">
+                            <label>Color</label><br>
+                            <label class="me-3"><input type="checkbox" name="color" value="Red" {% if 'Red' in product.color_list %}checked{% endif %}> Red</label>
+                            <label class="me-3"><input type="checkbox" name="color" value="Blue" {% if 'Blue' in product.color_list %}checked{% endif %}> Blue</label>
+                            <label class="me-3"><input type="checkbox" name="color" value="Black" {% if 'Black' in product.color_list %}checked{% endif %}> Black</label>
+                            <label class="me-3"><input type="checkbox" name="color" value="White" {% if 'White' in product.color_list %}checked{% endif %}> White</label>
+                            <label class="me-3"><input type="checkbox" name="color" value="Green" {% if 'Green' in product.color_list %}checked{% endif %}> Green</label>
+                        </div>
+                        <div class="form-group">
+                            <label>Current Image</label><br>
+                            <img src="{{ product.image.url }}" width="80px" height="80px"
+                                style="object-fit:cover; border-radius:5px;">
+                        </div>
+                        <div class="form-group">
+                            <label>Change Image (optional)</label>
+                            <input type="file" name="image" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-success">Update Product</button>
+                        <a href="{% url 'all_product' %}" class="btn btn-secondary">Back</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,199 @@
+{% extends 'customer/home.html' %}
+{% load static %}
+{% block content %}
+<!-- Shop Details Section Begin -->
+<style>
+    .option-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .option-label {
+        min-width: 55px;
+        font-weight: 600;
+        text-align: right;
+    }
+
+    .size-options,
+    .color-options {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 0;
+    }
+
+    .size-options input,
+    .color-options input {
+        display: none;
+    }
+
+    .size-options label {
+        width: 45px;
+        height: 45px;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-weight: 500;
+        color: #333;
+        transition: all 0.2s ease;
+        margin: 0;
+    }
+
+    .color-options label {
+        min-width: 45px;
+        height: 45px;
+        padding: 0 15px;
+        border: 1px solid #ccc;
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-weight: 500;
+        color: #333;
+        transition: all 0.2s ease;
+        margin: 0;
+        white-space: nowrap;
+        text-align: center;
+    }
+
+    .size-options input:checked+label,
+    .color-options input:checked+label {
+        border-color: #000;
+        background: #000;
+        color: #fff;
+    }
+</style>
+<section class="shop-details">
+    <div class="product__details__pic">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="product__details__breadcrumb">
+                        <a href="{% url 'home' %}">Home</a>
+                        <a href="{% url 'shop' %}">Shop</a>
+                        <span>Product Details</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 col-md-9">
+                    <div class="product__details__pic__item">
+                        <img src="{{ product.image.url }}" alt="{{ product.pname }}" style="width:100%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product__details__content">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                    <div class="product__details__text">
+                        <h4>{{ product.pname }}</h4>
+                        <h3>₹{{ product.price }}</h3>
+                        <p>{{ product.small_description }}</p>
+                        <div class="product__details__option">
+                            <form action="{% url 'add_to_cart' product.p_id %}" method="GET">
+                                <div class="option-row">
+                                    <span class="option-label">Size:</span>
+                                    <div class="size-options">
+                                        {% for s in product.size_list %}
+                                        <input type="radio" name="size" id="size-{{ s }}" value="{{ s }}" {% if forloop.first %}checked{% endif %}>
+                                        <label for="size-{{ s }}">{{ s }}</label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="option-row">
+                                    <span class="option-label">Color:</span>
+                                    <div class="color-options">
+                                        {% for c in product.color_list %}
+                                        <input type="radio" name="color" id="color-{{ c }}" value="{{ c }}" {% if forloop.first %}checked{% endif %}>
+                                        <label for="color-{{ c }}">{{ c }}</label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="product__details__cart__option"
+                                    style="display:flex; align-items:center; justify-content:center; gap:15px;">
+                                    <div class="quantity">
+                                        <div class="pro-qty">
+                                            <input type="number" name="quantity" value="1" min="1"
+                                                style="width:90px; text-align:center; border:1px solid #ccc; height:45px; font-size:16px;">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="primary-btn">add to cart</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="product__details__last__option">
+                            <h5><span>Guaranteed Safe Checkout</span></h5>
+                            <img src="{% static 'customer/img/shop-details/details-payment.png' %}" alt="">
+                            <ul>
+                                <li><span>SKU:</span> {{ product.p_id }}</li>
+                                <li><span>Category:</span> {{ product.cat.cat_name }}</li>
+                                <li><span>Subcategory:</span> {{ product.subcat.sub_name }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-5" role="tab">Description</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-5" role="tabpanel">
+                                <div class="product__details__tab__content">
+                                    <p class="note">{{ product.large_description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shop Details Section End -->
+
+<!-- Related Section Begin -->
+<section class="related spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="related-title">Related Product</h3>
+            </div>
+        </div>
+        <div class="row">
+            {% for item in related_products %}
+            <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
+                <div class="product__item">
+                    <a href="{% url 'shop_details' item.p_id %}">
+                        <div class="product__item__pic set-bg" data-setbg="{{ item.image.url }}">
+                        </div>
+                    </a>
+                    <div class="product__item__text">
+                        <h6><a href="{% url 'shop_details' item.p_id %}">{{ item.pname }}</a></h6>
+                        <a href="{% url 'shop_details' item.p_id %}" class="add-cart">+ Add To Cart</a><br>
+                        <h5>₹{{ item.price }}</h5>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>Koi related product nahi hai.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Related Section End -->
+{% endblock %}
