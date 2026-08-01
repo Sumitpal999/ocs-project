@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from myadmin.models import *
+from django.core.paginator import Paginator
 
 
 # ========== HOME ==========
 
 def home(request):
     return render(request,'customer/home.html')
+
 
 def shop(request):
     query = request.GET.get('q', '')
@@ -14,7 +16,11 @@ def shop(request):
     if query:
         products = products.filter(pname__icontains=query)
 
-    return render(request, 'customer/shop.html', {'products': products, 'query': query}) 
+    paginator = Paginator(products, 6)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'customer/shop.html', {'products': page_obj, 'query': query})
 
 def about(request):
     return render(request,'customer/about.html')
@@ -278,7 +284,12 @@ def mens(request):
     if query:
         products = products.filter(pname__icontains=query)
 
-    return render(request, 'customer/mens.html', {'products': products, 'query': query})
+    paginator = Paginator(products, 6)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'customer/mens.html', {'products': page_obj, 'query': query})
+
 
 def womens(request):
     query = request.GET.get('q', '')
@@ -287,7 +298,12 @@ def womens(request):
     if query:
         products = products.filter(pname__icontains=query)
 
-    return render(request, 'customer/womens.html', {'products': products, 'query': query})
+    paginator = Paginator(products, 6)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'customer/womens.html', {'products': page_obj, 'query': query})
+
 
 def child(request):
     query = request.GET.get('q', '')
@@ -296,7 +312,11 @@ def child(request):
     if query:
         products = products.filter(pname__icontains=query)
 
-    return render(request, 'customer/child.html', {'products': products, 'query': query})
+    paginator = Paginator(products, 6)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'customer/child.html', {'products': page_obj, 'query': query})
 
 # ========== MY ORDERS ==========
 
@@ -327,3 +347,30 @@ def logout_page(request):
 def clear_cart(request):
     request.session['shopping_cart'] = {}
     return redirect('shopping_cart')
+
+def wishlist_view(request):
+    if 'customer_id' not in request.session:
+        return redirect('login')
+
+    customer = Customer.objects.get(user_id=request.session['customer_id'])
+    items = Wishlist.objects.filter(customer=customer)
+    return render(request, 'customer/wishlist.html', {'items': items})
+
+
+def add_to_wishlist(request, p_id):
+    if 'customer_id' not in request.session:
+        return redirect('login')
+
+    customer = Customer.objects.get(user_id=request.session['customer_id'])
+    product = Product.objects.get(p_id=p_id)
+    Wishlist.objects.get_or_create(customer=customer, product=product)
+    return redirect('wishlist')
+
+
+def remove_from_wishlist(request, p_id):
+    if 'customer_id' not in request.session:
+        return redirect('login')
+
+    customer = Customer.objects.get(user_id=request.session['customer_id'])
+    Wishlist.objects.filter(customer=customer, product__p_id=p_id).delete()
+    return redirect('wishlist')

@@ -60,7 +60,7 @@
                     <a href="#searchToggle">
                         <img src="{% static 'customer/img/icon/search.png' %}" alt="">
                     </a>
-                    <a href="#"><img src="{% static 'customer/img/icon/heart.png' %}" alt=""></a>
+                    <a href="{% url 'wishlist' %}"><img src="{% static 'customer/img/icon/heart.png' %}" alt=""></a>
                     <a href="{% url 'shopping_cart' %}"><img src="{% static 'customer/img/icon/cart.png' %}" alt="">
                         <span>{{ cart_count|default:0 }}</span></a>
                     <div class="price">₹{{ cart_total|default:0 }}</div>

@@ -2,58 +2,84 @@
 {% load static %}
 {% block content %}
 <style>
-    .shop__sidebar__size, .shop__sidebar__color {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        gap: 8px !important;
-    }
-    .shop__sidebar__size label,
-    .shop__sidebar__color label {
-        position: relative;
-        cursor: pointer;
-        font-size: 13px;
-        margin: 0 !important;
-    }
-    .shop__sidebar__size label::before,
-    .shop__sidebar__size label::after,
-    .shop__sidebar__color label::before,
-    .shop__sidebar__color label::after {
-        display: none !important;
-        content: none !important;
-    }
-    .shop__sidebar__size label {
-        width: 45px !important;
-        height: 45px !important;
-        border-radius: 50% !important;
-        border: 1px solid #ccc !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 0 !important;
-        background: #fff !important;
-    }
-    .shop__sidebar__color label {
-        width: auto !important;
-        min-width: 45px !important;
-        height: 45px !important;
-        padding: 0 15px !important;
-        border-radius: 25px !important;
-        border: 1px solid #ccc !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        white-space: nowrap;
-        background: #fff !important;
-    }
-    .shop__sidebar__size input, .shop__sidebar__color input {
-        display: none !important;
-    }
-    .shop__sidebar__size label:has(input:checked),
-    .shop__sidebar__color label:has(input:checked) {
-        background: #000 !important;
-        color: #fff !important;
-        border-color: #000 !important;
-    }
+.shop__sidebar__size, .shop__sidebar__color {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+}
+.shop__sidebar__size label,
+.shop__sidebar__color label {
+    position: relative;
+    cursor: pointer;
+    font-size: 13px;
+    margin: 0 !important;
+}
+.shop__sidebar__size label::before,
+.shop__sidebar__size label::after,
+.shop__sidebar__color label::before,
+.shop__sidebar__color label::after {
+    display: none !important;
+    content: none !important;
+}
+.shop__sidebar__size label {
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 50% !important;
+    border: 1px solid #ccc !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    background: #fff !important;
+}
+.shop__sidebar__color label {
+    width: auto !important;
+    min-width: 45px !important;
+    height: 45px !important;
+    padding: 0 15px !important;
+    border-radius: 25px !important;
+    border: 1px solid #ccc !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap;
+    background: #fff !important;
+}
+.shop__sidebar__size input, .shop__sidebar__color input {
+    display: none !important;
+}
+.shop__sidebar__size label:has(input:checked),
+.shop__sidebar__color label:has(input:checked) {
+    background: #000 !important;
+    color: #fff !important;
+    border-color: #000 !important;
+}
+
+.product__actions a {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    display: inline-block !important;
+}
+
+.product__actions {
+    display: flex !important;
+    align-items: center;
+    gap: 15px;
+    margin: 8px 0;
+}
+
+.wishlist-btn {
+    color: #e74c3c;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.wishlist-btn:hover {
+    color: #c0392b;
+}
 </style>
 <section class="shop spad">
     <div class="container">
@@ -84,42 +110,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
-                                <div class="card-heading">
-                                    <a data-toggle="collapse" data-target="#collapseTwo">Branding</a>
-                                </div>
-                                <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <div class="shop__sidebar__brand">
-                                            <ul>
-                                                <li><a href="#">Louis Vuitton</a></li>
-                                                <li><a href="#">Chanel</a></li>
-                                                <li><a href="#">Hermes</a></li>
-                                                <li><a href="#">Gucci</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-heading">
-                                    <a data-toggle="collapse" data-target="#collapseThree">Filter Price</a>
-                                </div>
-                                <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <div class="shop__sidebar__price">
-                                            <ul>
-                                                <li><a href="#">$0.00 - $50.00</a></li>
-                                                <li><a href="#">$50.00 - $100.00</a></li>
-                                                <li><a href="#">$100.00 - $150.00</a></li>
-                                                <li><a href="#">$150.00 - $200.00</a></li>
-                                                <li><a href="#">$200.00 - $250.00</a></li>
-                                                <li><a href="#">250.00+</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="card">
                                 <div class="card-heading">
                                     <a data-toggle="collapse" data-target="#collapseFour">Size</a>
@@ -172,24 +163,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
-                                <div class="card-heading">
-                                    <a data-toggle="collapse" data-target="#collapseSix">Tags</a>
-                                </div>
-                                <div id="collapseSix" class="collapse show" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <div class="shop__sidebar__tags">
-                                            <a href="#">Product</a>
-                                            <a href="#">Bags</a>
-                                            <a href="#">Shoes</a>
-                                            <a href="#">Fashion</a>
-                                            <a href="#">Clothing</a>
-                                            <a href="#">Hats</a>
-                                            <a href="#">Accessories</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -224,7 +197,10 @@
                             </a>
                             <div class="product__item__text">
                                 <h6><a href="{% url 'shop_details' product.p_id %}">{{ product.pname }}</a></h6>
-                                <a href="{% url 'shop_details' product.p_id %}" class="add-cart">+ Add To Cart</a><br>
+                                <div class="product__actions">
+                                    <a href="{% url 'shop_details' product.p_id %}" class="add-cart">+ Add To Cart</a>
+                                    <a href="{% url 'add_to_wishlist' product.p_id %}" class="wishlist-btn">♥ Wishlist</a>
+                                </div>
                                 <h5>₹{{ product.price }}</h5>
                             </div>
                         </div>
@@ -238,11 +214,19 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="product__pagination">
-                            <a class="active" href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <span>...</span>
-                            <a href="#">21</a>
+                            {% if products.has_previous %}
+                            <a href="?page={{ products.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">«</a>
+                            {% endif %}
+                            {% for num in products.paginator.page_range %}
+                            {% if num == products.number %}
+                            <a class="active" href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">{{ num }}</a>
+                            {% else %}
+                            <a href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">{{ num }}</a>
+                            {% endif %}
+                            {% endfor %}
+                            {% if products.has_next %}
+                            <a href="?page={{ products.next_page_number }}{% if query %}&q={{ query }}{% endif %}">»</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

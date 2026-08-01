@@ -67,6 +67,32 @@
         color: #333 !important;
         font-weight: 500;
     }
+
+.product__actions a {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    display: inline-block !important;
+}
+
+.product__actions {
+    display: flex !important;
+    align-items: center;
+    gap: 15px;
+    margin: 8px 0;
+}
+
+.wishlist-btn {
+    color: #e74c3c;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.wishlist-btn:hover {
+    color: #c0392b;
+}
 </style>
 <section class="shop spad">
     <div class="container">
@@ -97,25 +123,6 @@
                             </div>
                         </div>
 
-                        <div class="card">
-                            <div class="card-heading">
-                                <a data-toggle="collapse" data-target="#collapseThree">Filter Price</a>
-                            </div>
-                            <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
-                                <div class="card-body">
-                                    <div class="shop__sidebar__price">
-                                        <ul>
-                                            <li><a href="#">₹0.00 - ₹50.00</a></li>
-                                            <li><a href="#">₹50.00 - ₹100.00</a></li>
-                                            <li><a href="#">₹100.00 - ₹150.00</a></li>
-                                            <li><a href="#">₹150.00 - ₹200.00</a></li>
-                                            <li><a href="#">₹200.00 - ₹250.00</a></li>
-                                            <li><a href="#">250.00+</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="card">
                             <div class="card-heading">
@@ -177,7 +184,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="shop__product__option__left">
-                                <p>Showing 1–{{ products|length }} of {{ products|length }} results</p>
+                                <p>Showing {{ products.start_index }}–{{ products.end_index }} of {{ products.paginator.count }} results</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -185,8 +192,8 @@
                                 <p>Sort by Price:</p>
                                 <select>
                                     <option value="">Low To High</option>
-                                    <option value="">₹0 - ₹55</option>
-                                    <option value="">₹55 - ₹100</option>
+                                    <option value="">400 - ₹800</option>
+                                    <option value="">₹800 - ₹1500</option>
                                 </select>
                             </div>
                         </div>
@@ -202,7 +209,10 @@
                             </a>
                             <div class="product__item__text">
                                 <h6><a href="{% url 'shop_details' product.p_id %}">{{ product.pname }}</a></h6>
-                                <a href="{% url 'shop_details' product.p_id %}" class="add-cart">+ Add To Cart</a><br>
+                                <div class="product__actions">
+                                    <a href="{% url 'shop_details' product.p_id %}" class="add-cart">+ Add To Cart</a>
+                                    <a href="{% url 'add_to_wishlist' product.p_id %}" class="wishlist-btn">♥ Wishlist</a>
+                                </div>
                                 <h5>₹{{ product.price }}</h5>
                             </div>
                         </div>
@@ -216,11 +226,19 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="product__pagination">
-                            <a class="active" href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <span>...</span>
-                            <a href="#">21</a>
+                            {% if products.has_previous %}
+                            <a href="?page={{ products.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">«</a>
+                            {% endif %}
+                            {% for num in products.paginator.page_range %}
+                            {% if num == products.number %}
+                            <a class="active" href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">{{ num }}</a>
+                            {% else %}
+                            <a href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">{{ num }}</a>
+                            {% endif %}
+                            {% endfor %}
+                            {% if products.has_next %}
+                            <a href="?page={{ products.next_page_number }}{% if query %}&q={{ query }}{% endif %}">»</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

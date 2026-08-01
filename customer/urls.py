@@ -43,6 +43,9 @@ urlpatterns = [
     path('logout/', views.logout_page, name='logout'),
     path('clear-cart/', views.clear_cart, name='clear_cart'),
 
-    # path('create-razorpay-order/', views.create_razorpay_order, name='create_razorpay_order'),
-    # path('payment-success/', views.payment_success, name='payment_success'),
+    path('wishlist/', views.wishlist_view, name='wishlist'),
+    path('wishlist/add/<int:p_id>/', views.add_to_wishlist, name='add_to_wishlist'),
+    path('wishlist/remove/<int:p_id>/', views.remove_from_wishlist, name='remove_from_wishlist'),
+
+    
 ]
